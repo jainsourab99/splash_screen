@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen/profile_screen.dart';
 import 'package:splash_screen/splash_screen.dart';
 
 void main() {
@@ -57,6 +58,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var nameControllet = TextEditingController();
+  var ageControllet = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,23 +74,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Initial After SplashScreen",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SplashScreen()));
-                },
-                child: Text("Next"))
-          ],
+        child: Container(
+          width: 400,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Initial After SplashScreen",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: nameControllet,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: ageControllet,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                                  name: nameControllet.text.toString(),
+                                  age: ageControllet.text.toString(),
+                                )));
+                  },
+                  child: const Text("Next"))
+            ],
+          ),
         ),
       ),
     );
